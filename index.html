@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formation IA creative</title>
+  <style>
+    :root {
+      --bg: #f4f3ef;
+      --paper: #fffdf8;
+      --ink: #1f2724;
+      --muted: #66706b;
+      --line: #ddd8cd;
+      --soft: #eaf4ef;
+      --teal: #0c6b61;
+      --teal-dark: #063f3a;
+      --rose: #a84e64;
+      --gold: #a76f19;
+      --shadow: 0 18px 55px rgba(31, 39, 36, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .hero {
+      min-height: 520px;
+      display: grid;
+      align-items: end;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(16, 23, 20, 0.78), rgba(16, 23, 20, 0.34)),
+        url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=82") center / cover;
+    }
+
+    .hero-inner {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 46px 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: #d8efe9;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 880px;
+      font-size: clamp(2.8rem, 7vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(1rem, 1.8vw, 1.28rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .primary,
+    .secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border-radius: 8px;
+      padding: 0 16px;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .primary {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .secondary {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .quick-start {
+      width: min(1180px, calc(100% - 36px));
+      margin: -48px auto 24px;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .step {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .step strong {
+      display: block;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-block: 1px solid var(--line);
+      background: rgba(244, 243, 239, 0.94);
+      backdrop-filter: blur(16px);
+    }
+
+    .toolbar-inner {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 12px 0;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 220px auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 0 13px;
+    }
+
+    .open-chat {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: white;
+      padding: 0 15px;
+      text-decoration: none;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 0 0 76px;
+    }
+
+    .progress {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin: 20px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .progress p {
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 8px;
+      margin-top: 12px;
+      border-radius: 999px;
+      background: #e4e0d7;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--rose));
+      transition: width 180ms ease;
+    }
+
+    .reset {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--paper);
+      color: var(--muted);
+      padding: 0 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 34px 0 14px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.5rem);
+      letter-spacing: 0;
+    }
+
+    .section-title p {
+      max-width: 560px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .chapter-map {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .map-card {
+      min-height: 210px;
+      position: relative;
+      display: flex;
+      align-items: end;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      background: #1b2421;
+      box-shadow: 0 12px 30px rgba(31, 39, 36, 0.12);
+    }
+
+    .map-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.92);
+      transition: transform 220ms ease;
+    }
+
+    .map-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .map-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.76));
+    }
+
+    .map-content {
+      position: relative;
+      z-index: 1;
+      padding: 13px;
+    }
+
+    .map-content span {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 8px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--teal-dark);
+      font-weight: 950;
+    }
+
+    .map-content strong {
+      display: block;
+      font-size: 0.96rem;
+      line-height: 1.18;
+    }
+
+    .chapters {
+      display: grid;
+      gap: 14px;
+    }
+
+    details.chapter {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      overflow: clip;
+      box-shadow: 0 10px 24px rgba(31, 39, 36, 0.05);
+    }
+
+    details.chapter[hidden] {
+      display: none;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chapter-head {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px;
+    }
+
+    .thumb {
+      width: 96px;
+      height: 82px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--soft);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .chapter-title {
+      min-width: 0;
+    }
+
+    .chapter-title h3 {
+      margin: 0;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      letter-spacing: 0;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 7px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 25px;
+      border-radius: 999px;
+      padding: 0 9px;
+      background: #f3edf1;
+      color: #723f52;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .open-indicator {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--teal-dark);
+      font-weight: 950;
+      transition: transform 160ms ease;
+    }
+
+    details[open] .open-indicator {
+      transform: rotate(180deg);
+    }
+
+    .chapter-body {
+      border-top: 1px solid var(--line);
+      padding: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+      gap: 18px;
+    }
+
+    .lesson-copy {
+      color: var(--muted);
+    }
+
+    .lesson-copy h4 {
+      margin: 0 0 7px;
+      color: var(--ink);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lesson-copy p {
+      margin: 0 0 14px;
+    }
+
+    .lesson-copy ul {
+      margin: 0 0 16px;
+      padding-left: 20px;
+    }
+
+    .done-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--teal-dark);
+      font-weight: 850;
+    }
+
+    .done-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--teal);
+    }
+
+    .prompt-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .prompt-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffefa;
+      overflow: hidden;
+    }
+
+    .prompt-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .prompt-top strong {
+      line-height: 1.2;
+    }
+
+    .copy {
+      min-height: 36px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--teal);
+      color: white;
+      padding: 0 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .copy:hover {
+      background: var(--teal-dark);
+    }
+
+    textarea {
+      display: block;
+      width: 100%;
+      min-height: 230px;
+      border: 0;
+      resize: vertical;
+      padding: 13px;
+      color: var(--ink);
+      background: #fffefa;
+      font: 0.9rem ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      line-height: 1.45;
+    }
+
+    .status {
+      margin-left: 7px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .empty {
+      display: none;
+      padding: 28px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty.visible {
+      display: block;
+    }
+
+    @media (max-width: 1040px) {
+      .quick-start {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .chapter-map {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .chapter-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero {
+        min-height: 560px;
+      }
+
+      .hero-inner {
+        width: min(100% - 28px, 1180px);
+      }
+
+      h1 {
+        font-size: 2.15rem;
+        line-height: 1.02;
+        max-width: 330px;
+      }
+
+      .lead {
+        font-size: 1rem;
+        max-width: 330px;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .primary,
+      .secondary {
+        width: 100%;
+      }
+
+      .toolbar-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-start,
+      .chapter-map {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-start,
+      main,
+      .toolbar-inner {
+        width: min(calc(100vw - 28px), 330px);
+        max-width: 330px;
+      }
+
+      .quick-start,
+      main {
+        margin-left: 14px;
+        margin-right: 14px;
+      }
+
+      .section-title {
+        display: block;
+      }
+
+      .section-title p {
+        margin-top: 8px;
+      }
+
+      .chapter-head {
+        grid-template-columns: 76px 1fr auto;
+        gap: 10px;
+      }
+
+      .thumb {
+        width: 76px;
+        height: 68px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Formation guidee par l'IA</p>
+      <h1>Tu vas apprendre a creer avec l'IA.</h1>
+      <p class="lead">Un parcours simple, chapitre par chapitre, pour installer ton environnement, comprendre les outils, utiliser le terminal sans stress, travailler avec Codex ou Claude Code, puis construire ton portfolio.</p>
+      <div class="hero-actions">
+        <a class="primary" href="#chapters">Commencer le parcours</a>
+        <a class="secondary" href="https://chatgpt.com/" target="_blank" rel="noreferrer">Ouvrir ChatGPT</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="quick-start" aria-label="Mode d'emploi">
+    <article class="step"><strong>1. Ouvre un chapitre</strong><p>Tout est range dans l'ordre. Commence par le premier chapitre ouvert.</p></article>
+    <article class="step"><strong>2. Copie la lecon</strong><p>Colle le prompt dans ChatGPT ou Claude et laisse-toi guider.</p></article>
+    <article class="step"><strong>3. Fais l'exercice</strong><p>Reviens ici, copie l'exercice, puis pratique sur ton Mac.</p></article>
+    <article class="step"><strong>4. Coche le chapitre</strong><p>Quand tu as compris et verifie, marque le chapitre comme termine.</p></article>
+  </section>
+
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <input id="search" type="search" placeholder="Chercher : terminal, Codex, Git, portfolio, publication...">
+      <select id="filter" aria-label="Filtrer les chapitres">
+        <option value="all">Tout le parcours</option>
+        <option value="setup">Setup et outils</option>
+        <option value="code">Code et agents IA</option>
+        <option value="create">Creation et portfolio</option>
+        <option value="practice">Pratique et depannage</option>
+      </select>
+      <a class="open-chat" href="https://chatgpt.com/" target="_blank" rel="noreferrer">Ouvrir ChatGPT</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="progress">
+      <div>
+        <strong id="progress-title">0 chapitre termine</strong>
+        <p>Ta progression reste enregistree dans ce navigateur.</p>
+        <div class="bar" aria-hidden="true"><span id="progress-bar"></span></div>
+      </div>
+      <button id="reset" class="reset" type="button">Recommencer</button>
+    </section>
+
+    <section class="section-title">
+      <div>
+        <p class="eyebrow" style="color: var(--teal-dark); margin-bottom: 8px;">Menu visuel</p>
+        <h2>Choisis ton chapitre</h2>
+      </div>
+      <p>Les cartes servent de sommaire. Clique sur une image pour aller directement au chapitre, puis deroule seulement ce dont tu as besoin.</p>
+    </section>
+
+    <nav id="chapter-map" class="chapter-map" aria-label="Chapitres"></nav>
+
+    <section class="section-title" id="chapters">
+      <div>
+        <p class="eyebrow" style="color: var(--teal-dark); margin-bottom: 8px;">Parcours</p>
+        <h2>Les chapitres a derouler</h2>
+      </div>
+      <p>Dans chaque chapitre : une explication, ce que tu vas apprendre, puis les prompts a copier dans l'ordre.</p>
+    </section>
+
+    <section id="chapter-list" class="chapters"></section>
+    <div id="empty" class="empty">Aucun chapitre ne correspond a cette recherche.</div>
+  </main>
+
+  <script>
+    const progressKey = "formation-ia-creative-progress";
+    const imagePool = [
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1487014679447-9f8336841d58?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=78",
+      "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=900&q=78"
+    ];
+
+    const categoryRules = [
+      { key: "setup", label: "Setup et outils", words: ["mac", "terminal", "installer", "outils", "git", "github"] },
+      { key: "code", label: "Code et agents IA", words: ["codex", "claude code", "cursor", "assistants", "html", "css", "javascript", "code"] },
+      { key: "create", label: "Creation et portfolio", words: ["portfolio", "contenus", "publier", "automatiser", "creative"] },
+      { key: "practice", label: "Pratique et depannage", words: ["debloquer", "erreur", "evaluation", "pratique"] }
+    ];
+
+    const chapterMap = document.querySelector("#chapter-map");
+    const chapterList = document.querySelector("#chapter-list");
+    const searchEl = document.querySelector("#search");
+    const filterEl = document.querySelector("#filter");
+    const emptyEl = document.querySelector("#empty");
+    const progressTitle = document.querySelector("#progress-title");
+    const progressBar = document.querySelector("#progress-bar");
+    const resetButton = document.querySelector("#reset");
+
+    let chapters = [];
+    let state = { query: "", filter: "all" };
+
+    function normalize(value) {
+      return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function inlineMarkdown(value) {
+      return escapeHtml(value)
+        .replace(/`([^`]+)`/g, "<code>$1</code>")
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    }
+
+    function mdBlock(value) {
+      const lines = value.split("\n").map((line) => line.trim()).filter(Boolean);
+      if (!lines.length) return "";
+      if (lines.every((line) => line.startsWith("- "))) {
+        return `<ul>${lines.map((line) => `<li>${inlineMarkdown(line.slice(2))}</li>`).join("")}</ul>`;
+      }
+      return lines.map((line) => `<p>${inlineMarkdown(line)}</p>`).join("");
+    }
+
+    function getProgress() {
+      try {
+        return JSON.parse(localStorage.getItem(progressKey)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function setProgress(progress) {
+      localStorage.setItem(progressKey, JSON.stringify(progress));
+    }
+
+    function parseGuide(markdown) {
+      const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+      const blocks = [];
+      let current = null;
+
+      for (const line of lines) {
+        const chapterMatch = line.match(/^# Chapitre (.+)$/);
+        const stop = line === "# Parcours conseille" || line === "# Regle finale";
+
+        if (stop) {
+          if (current) blocks.push(current);
+          break;
+        }
+
+        if (chapterMatch) {
+          if (current) blocks.push(current);
+          current = { rawTitle: chapterMatch[1].trim(), bodyLines: [] };
+          continue;
+        }
+
+        if (current) current.bodyLines.push(line);
+      }
+
+      return blocks.map((block, index) => {
+        const rawTitle = block.rawTitle;
+        const body = block.bodyLines.join("\n").trim();
+        const numberMatch = rawTitle.match(/^(\d+)\s*-\s*(.+)$/);
+        const number = numberMatch ? numberMatch[1] : String(index + 1);
+        const title = numberMatch ? numberMatch[2] : rawTitle;
+        const sections = parseSections(body);
+        const prompts = [...body.matchAll(/## (Prompt [^\n]+)\n\n```text\n([\s\S]*?)```/g)].map((match) => ({
+          title: match[1].trim(),
+          text: match[2].trim()
+        }));
+        const haystack = normalize(`${title} ${body}`);
+        const rule = categoryRules.find((item) => item.words.some((word) => haystack.includes(word)));
+
+        return {
+          id: `chapitre-${number}`,
+          number,
+          title,
+          body,
+          sections,
+          prompts,
+          category: rule ? rule.key : "practice",
+          categoryLabel: rule ? rule.label : "Pratique et depannage",
+          image: imagePool[index % imagePool.length],
+          haystack
+        };
+      });
+    }
+
+    function parseSections(body) {
+      const sections = {};
+      [
+        ["purpose", "Ce chapitre sert a quoi"],
+        ["learn", "Ce que tu vas apprendre"],
+        ["expected", "Resultat attendu"]
+      ].forEach(([key, title]) => {
+        const pattern = new RegExp(`## ${title.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\$&")}\\n\\n([\\s\\S]*?)(?=\\n## |\\s*$)`);
+        const match = body.match(pattern);
+        if (match) sections[key] = match[1].trim().replace(/\n---$/, "").trim();
+      });
+      return sections;
+    }
+
+    function visibleChapters() {
+      const query = normalize(state.query.trim());
+      return chapters.filter((chapter) => {
+        const matchesQuery = !query || chapter.haystack.includes(query);
+        const matchesFilter = state.filter === "all" || chapter.category === state.filter;
+        return matchesQuery && matchesFilter;
+      });
+    }
+
+    function render() {
+      const progress = getProgress();
+      const visible = visibleChapters();
+
+      chapterMap.innerHTML = visible.map((chapter) => `
+        <a class="map-card" href="#${chapter.id}">
+          <img src="${chapter.image}" alt="">
+          <div class="map-content">
+            <span>${chapter.number}</span>
+            <strong>${escapeHtml(chapter.title)}</strong>
+          </div>
+        </a>
+      `).join("");
+
+      chapterList.innerHTML = visible.map((chapter, index) => {
+        const isOpen = index === 0 ? " open" : "";
+        const purpose = chapter.sections.purpose ? `
+          <section class="lesson-copy">
+            <h4>Pourquoi ce chapitre</h4>
+            ${mdBlock(chapter.sections.purpose)}
+          </section>
+        ` : "";
+        const learn = chapter.sections.learn ? `
+          <section class="lesson-copy">
+            <h4>Tu vas apprendre</h4>
+            ${mdBlock(chapter.sections.learn)}
+          </section>
+        ` : "";
+        const expected = chapter.sections.expected ? `
+          <section class="lesson-copy">
+            <h4>Avant de passer a la suite</h4>
+            ${mdBlock(chapter.sections.expected)}
+          </section>
+        ` : "";
+        const prompts = chapter.prompts.map((prompt, promptIndex) => `
+          <article class="prompt-card">
+            <div class="prompt-top">
+              <strong>${escapeHtml(prompt.title)}</strong>
+              <div>
+                <button class="copy" type="button" data-copy="${chapter.id}-${promptIndex}">Copier</button>
+                <span class="status"></span>
+              </div>
+            </div>
+            <textarea id="${chapter.id}-${promptIndex}" readonly>${escapeHtml(prompt.text)}</textarea>
+          </article>
+        `).join("");
+
+        return `
+          <details class="chapter" id="${chapter.id}"${isOpen}>
+            <summary class="chapter-head">
+              <div class="thumb"><img src="${chapter.image}" alt=""></div>
+              <div class="chapter-title">
+                <h3>${chapter.number}. ${escapeHtml(chapter.title)}</h3>
+                <div class="meta">
+                  <span class="pill">${chapter.categoryLabel}</span>
+                  <span class="pill">${chapter.prompts.length} prompts</span>
+                  ${progress[chapter.id] ? `<span class="pill">Termine</span>` : ""}
+                </div>
+              </div>
+              <div class="open-indicator">⌄</div>
+            </summary>
+            <div class="chapter-body">
+              <div>
+                ${purpose}
+                ${learn}
+                ${expected}
+                <label class="done-row">
+                  <input type="checkbox" data-done="${chapter.id}" ${progress[chapter.id] ? "checked" : ""}>
+                  J'ai fini ce chapitre
+                </label>
+              </div>
+              <div class="prompt-list">${prompts}</div>
+            </div>
+          </details>
+        `;
+      }).join("");
+
+      emptyEl.classList.toggle("visible", visible.length === 0);
+      bindActions();
+      updateProgress();
+    }
+
+    function bindActions() {
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const textarea = document.getElementById(button.dataset.copy);
+          const status = button.parentElement.querySelector(".status");
+          try {
+            await navigator.clipboard.writeText(textarea.value);
+            status.textContent = "Copie.";
+          } catch {
+            textarea.focus();
+            textarea.select();
+            status.textContent = "Selectionne, puis Cmd+C.";
+          }
+          setTimeout(() => {
+            status.textContent = "";
+          }, 1500);
+        });
+      });
+
+      document.querySelectorAll("[data-done]").forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          const progress = getProgress();
+          progress[checkbox.dataset.done] = checkbox.checked;
+          setProgress(progress);
+          render();
+        });
+      });
+    }
+
+    function updateProgress() {
+      const progress = getProgress();
+      const count = chapters.filter((chapter) => progress[chapter.id]).length;
+      const total = chapters.length;
+      const percent = total ? Math.round((count / total) * 100) : 0;
+      progressTitle.textContent = `${count} / ${total} chapitres termines`;
+      progressBar.style.width = `${percent}%`;
+    }
+
+    searchEl.addEventListener("input", () => {
+      state.query = searchEl.value;
+      render();
+    });
+
+    filterEl.addEventListener("change", () => {
+      state.filter = filterEl.value;
+      render();
+    });
+
+    resetButton.addEventListener("click", () => {
+      localStorage.removeItem(progressKey);
+      render();
+    });
+
+    fetch("guide-maman-ia.md")
+      .then((response) => {
+        if (!response.ok) throw new Error("Guide introuvable");
+        return response.text();
+      })
+      .then((markdown) => {
+        chapters = parseGuide(markdown);
+        render();
+      })
+      .catch(() => {
+        chapterList.innerHTML = `<div class="empty visible">Le guide ne s'est pas charge. Recharge la page depuis l'adresse locale du serveur.</div>`;
+      });
+  </script>
+</body>
+</html>
